@@ -1,5 +1,6 @@
 package br.com.fiap.api_rest.service;
 
+import br.com.fiap.api_rest.dto.ProdutoLista;
 import br.com.fiap.api_rest.dto.ProdutoRequest;
 import br.com.fiap.api_rest.dto.ProdutoResponse;
 import br.com.fiap.api_rest.mapper.ProdutoMapper;
@@ -11,10 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -42,10 +41,10 @@ public class ProdutoService {
     }
 
     // Page, Pageable
-    public Page<ProdutoResponse> read(Pageable pageable) {
+    public Page<ProdutoLista> read(Pageable pageable) {
         return produtoRepository
                 .findAll(pageable)
-                .map(mapper::produtoToResponse);
+                .map(mapper::produtoToProdutoLista);
     }
 
     public Produto update(Produto produto) {
